@@ -7,6 +7,7 @@ export const workoutsStyle = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "bold",
     lineHeight: 38,
+    letterSpacing: -0.3,
     color: "#FFF",
     width: 300,
   },
@@ -14,7 +15,9 @@ export const workoutsStyle = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "500",
+
+    // lineHeight: "160%",
+    letterSpacing: -0.04,
     color: "#D7D8D9",
     width: 300,
     marginTop: 12,
@@ -26,7 +29,9 @@ export const workoutsStyle = StyleSheet.create({
     left: 24,
     fontSize: 20,
     fontStyle: "normal",
-
+    fontWeight: "bold",
+    lineHeight: 25.6,
+    letterSpacing: -0.04,
     color: "#FFF",
     marginTop: 24,
   },
@@ -57,7 +62,9 @@ export const workoutsStyle = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "500",
+
+    // lineHeight: "160%",
+    letterSpacing: -0.04,
     color: "#FFF",
     marginTop: 11,
   },
@@ -67,6 +74,7 @@ export const workoutsStyle = StyleSheet.create({
     height: 80,
   },
   playButton: {
+    zIndex: 99,
     backgroundColor: "#FF8036",
     alignSelf: "center",
     padding: 8,
@@ -78,7 +86,9 @@ export const workoutsStyle = StyleSheet.create({
   },
   previewButton: {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
-    justifyContent: "center",
+
+    // Makes the container fill the entire screen or its parent container
+    justifyContent: "center", // Centers children vertically in the container
     alignItems: "center",
     width: 72,
     height: 72,
@@ -99,8 +109,9 @@ export const workoutsStyle = StyleSheet.create({
     textAlign: "justify",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "500",
+
     lineHeight: 20,
+    letterSpacing: -0.04,
     color: "#9EA0A5",
     marginTop: 12,
   },
@@ -108,8 +119,9 @@ export const workoutsStyle = StyleSheet.create({
     textAlign: "justify",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "500",
+    fontWeight: "bold",
     lineHeight: 25,
+    letterSpacing: -0.048,
     color: "#FFF",
     marginTop: 6,
   },
@@ -117,8 +129,31 @@ export const workoutsStyle = StyleSheet.create({
     textAlign: "justify",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "500",
+
     lineHeight: 20,
+    letterSpacing: -0.04,
+
+    color: "#D7D8D9",
+    marginTop: 6,
+  },
+
+  exText5: {
+    textAlign: "justify",
+    fontSize: 16,
+    fontStyle: "normal",
+
+    lineHeight: 20,
+    letterSpacing: -0.04,
+
+    color: "#D7D8D9",
+  },
+  exText4: {
+    textAlign: "justify",
+    fontSize: 12,
+    fontStyle: "normal",
+
+    lineHeight: 20,
+    letterSpacing: -0.04,
     alignItems: "center",
     color: "#D7D8D9",
     marginTop: 6,

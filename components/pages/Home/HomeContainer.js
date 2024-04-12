@@ -46,24 +46,6 @@ const HomeContainer = () => {
         category: "Shoulders",
         link: "blank",
       },
-      {
-        image: chestImage,
-        title: "Massive Upper Body",
-        category: "Chest & Shoulders",
-        link: "blank",
-      },
-      {
-        image: backImage,
-        title: "Back Workout",
-        category: "Back & Lats",
-        link: "blank",
-      },
-      {
-        image: shouldersImage,
-        title: "Shoulder Workout",
-        category: "Shoulders",
-        link: "blank",
-      },
     ],
     workouts: [
       {

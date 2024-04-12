@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Image, Text, View } from "react-native";
 import { ImageBackground } from "react-native";
 import playButtonTrans from "../../public/playButton.png";
@@ -14,7 +14,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 
-export function VideoPlayer({ video }) {
+export function VideoPlayer({ video, onExitFullscreen }) {
   const [status, setStatus] = React.useState({});
   const [initiateFullscreen, setInitiateFullscreen] = React.useState(true); // Add state to initiate fullscreen on load
 
@@ -27,6 +27,13 @@ export function VideoPlayer({ video }) {
       setInitiateFullscreen(false); // Prevent further attempts to enter fullscreen
     }
   }, [status.isLoaded, initiateFullscreen]);
+
+  // Handle exit fullscreen
+  const handleExitFullscreen = () => {
+    // Do whatever you need when exiting fullscreen
+    // For example, you can set a state to indicate fullscreen exit
+    onExitFullscreen();
+  };
 
   return (
     <View style={styles.container}>
@@ -46,10 +53,17 @@ export function VideoPlayer({ video }) {
             setInitiateFullscreen(false);
           }
         }}
+        // Add the onFullscreenUpdate event to handle exit fullscreen
+        onFullscreenUpdate={(event) => {
+          if (event.fullscreenUpdate === 0) {
+            handleExitFullscreen();
+          }
+        }}
       />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -75,8 +89,15 @@ const ExercisePreview = ({ navigation }) => {
 
   // Function to handle play button press
   const handlePlayPress = () => {
-    videoRef.current.presentFullscreenPlayer(); // Directly trigger fullscreen
+   setOpenB(true)
+   videoRef.current.presentFullscreenPlayer(); // Directly trigger fullscreen
   };
+
+  const handleExitFullscreen = () => {
+    setOpenB(false);
+  }
+console.log(exercise)
+  const [openB, setOpenB] = useState(false)
   return (
     <View style={{ flexDirection: "column", height: "100%" }}>
       <View style={{ width: "100%", height: "60%", flexDirection: "column" }}>
@@ -93,12 +114,14 @@ const ExercisePreview = ({ navigation }) => {
               alignItems: "center", // Center horizontally in the ImageBackground
             }}
           >
+            {openB && 
             <TouchableOpacity
               style={workoutsStyle.previewButton}
               onPress={handlePlayPress}
             >
               <PlayButton />
             </TouchableOpacity>
+            }
           </View>
           <View
             style={{
@@ -115,17 +138,9 @@ const ExercisePreview = ({ navigation }) => {
                 color: "#FFFFFF",
               }}
             >
-              {exercise?.name}
+              {exercise?.exercise}
             </Text>
-            <Text
-              style={{
-                fontSize: 18,
-                alignSelf: "center",
-                color: "#FFFFFF",
-              }}
-            >
-              With {exercise?.trainer} Trainer
-            </Text>
+
           </View>
         </ImageBackground>
       </View>
@@ -136,7 +151,7 @@ const ExercisePreview = ({ navigation }) => {
           backgroundColor: "#24262B",
           width: "100%",
           height: "100%",
-          alignItems: "flex-end",
+          alignItems: "center",
           padding: 20,
         }}
       >
@@ -151,6 +166,7 @@ const ExercisePreview = ({ navigation }) => {
         >
           {exercise?.description}
         </Text>
+        {!openB &&
         <TouchableOpacity
           style={{
             justifyContent: "center",
@@ -162,24 +178,24 @@ const ExercisePreview = ({ navigation }) => {
             height: 54,
             width: "100%",
           }}
+          onPress={() => setOpenB(true)}
         >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
             <Text
               style={{
                 fontWeight: "600",
                 fontSize: 20,
                 color: "#FFFFFF",
-                marginRight: 8, // Add some space between text and SVG if needed
               }}
             >
               Start Exercise
             </Text>
             <StopWatch />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> }
       </View>
 
-      <VideoPlayer video={videoRef} />
+      {openB && <VideoPlayer video={videoRef}  onExitFullscreen={handleExitFullscreen}/>}
     </View>
   );
 };

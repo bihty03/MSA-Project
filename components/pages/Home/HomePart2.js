@@ -24,7 +24,7 @@ const FitnessCard = ({ image, title, category, link, all }) => {
         <Text style={homeStyles.home_2.imageCard.category}>{category}</Text>
 
         <TouchableOpacity style={homeStyles.home_2.imageCard.button}>
-          <Text style={{ color: "#fff" }}>Start</Text>
+          <Text style={{ color: "#fff" }}>In work...</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

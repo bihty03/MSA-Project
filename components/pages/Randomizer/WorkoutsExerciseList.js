@@ -102,12 +102,15 @@ const WorkoutCard = ({ exercise, navigation }) => {
         </View>
       </View>
 
-      <TouchableOpacity
-        style={workoutsStyle.playButton}
-        onPress={() => handleExercise(exercise)}
-      >
-        <PlayButton />
-      </TouchableOpacity>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
+  {/* // adaugat row cu time/ kcal-total/ 4x10 sets, vezi pe wapp cu ionut */}
+  <TouchableOpacity
+    style={workoutsStyle.playButton}
+    onPress={() => handleExercise(exercise)}
+  >
+    <PlayButton />
+  </TouchableOpacity>
+</View>
     </View>
   );
 };
@@ -175,8 +178,6 @@ const WorkoutsExerciseList = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         <HomePart1 person={person} />
-
-        <Text> Workouts</Text>
 
         <Text style={workoutsStyle.text}>Your selected type exercises</Text>
         <View style={{ marginBottom: 24 }} key={exercisesList}>
