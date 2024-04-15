@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { ImageBackground } from "react-native";
 import playButtonTrans from "../../public/playButton.png";
@@ -14,7 +14,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 
-export function VideoPlayer({ video, onExitFullscreen }) {
+export function VideoPlayer({ video }) {
   const [status, setStatus] = React.useState({});
   const [initiateFullscreen, setInitiateFullscreen] = React.useState(true); // Add state to initiate fullscreen on load
 
@@ -27,13 +27,6 @@ export function VideoPlayer({ video, onExitFullscreen }) {
       setInitiateFullscreen(false); // Prevent further attempts to enter fullscreen
     }
   }, [status.isLoaded, initiateFullscreen]);
-
-  // Handle exit fullscreen
-  const handleExitFullscreen = () => {
-    // Do whatever you need when exiting fullscreen
-    // For example, you can set a state to indicate fullscreen exit
-    onExitFullscreen();
-  };
 
   return (
     <View style={styles.container}>
@@ -53,17 +46,10 @@ export function VideoPlayer({ video, onExitFullscreen }) {
             setInitiateFullscreen(false);
           }
         }}
-        // Add the onFullscreenUpdate event to handle exit fullscreen
-        onFullscreenUpdate={(event) => {
-          if (event.fullscreenUpdate === 0) {
-            handleExitFullscreen();
-          }
-        }}
       />
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -89,15 +75,9 @@ const ExercisePreview = ({ navigation }) => {
 
   // Function to handle play button press
   const handlePlayPress = () => {
-   setOpenB(true)
-   videoRef.current.presentFullscreenPlayer(); // Directly trigger fullscreen
+    videoRef.current.presentFullscreenPlayer(); // Directly trigger fullscreen
   };
 
-  const handleExitFullscreen = () => {
-    setOpenB(false);
-  }
-console.log(exercise)
-  const [openB, setOpenB] = useState(false)
   return (
     <View style={{ flexDirection: "column", height: "100%" }}>
       <View style={{ width: "100%", height: "60%", flexDirection: "column" }}>
@@ -114,14 +94,12 @@ console.log(exercise)
               alignItems: "center", // Center horizontally in the ImageBackground
             }}
           >
-            {openB && 
             <TouchableOpacity
               style={workoutsStyle.previewButton}
               onPress={handlePlayPress}
             >
               <PlayButton />
             </TouchableOpacity>
-            }
           </View>
           <View
             style={{
@@ -140,7 +118,6 @@ console.log(exercise)
             >
               {exercise?.exercise}
             </Text>
-
           </View>
         </ImageBackground>
       </View>
@@ -166,7 +143,7 @@ console.log(exercise)
         >
           {exercise?.description}
         </Text>
-        {!openB &&
+
         <TouchableOpacity
           style={{
             justifyContent: "center",
@@ -178,9 +155,11 @@ console.log(exercise)
             height: 54,
             width: "100%",
           }}
-          onPress={() => setOpenB(true)}
+          onPress={handlePlayPress}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
+          <View
+            style={{ flexDirection: "row", alignItems: "center", padding: 10 }}
+          >
             <Text
               style={{
                 fontWeight: "600",
@@ -192,10 +171,10 @@ console.log(exercise)
             </Text>
             <StopWatch />
           </View>
-        </TouchableOpacity> }
+        </TouchableOpacity>
       </View>
 
-      {openB && <VideoPlayer video={videoRef}  onExitFullscreen={handleExitFullscreen}/>}
+      <VideoPlayer video={videoRef} />
     </View>
   );
 };

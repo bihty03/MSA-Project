@@ -77,24 +77,31 @@ const Profile = ({ navigation }) => {
       <View
         style={{
           backgroundColor: "#24262B",
-          borderRadius: 32,
-          top: "-4%",
-          height: "20%",
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+          alignItems: "center",
+          paddingTop: 24,
+          height: 125,
         }}
       >
         <View
-          style={{ flexDirection: "row", alignContent: "center", top: "40%" }}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 24,
+            alignItems: "center",
+            width: "100%",
+          }}
         >
-          <TouchableOpacity style={[ProfileStyles.photoBox, { left: "10%" }]}>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <BackArrowIcon />
-            </View>
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderRadius: 10,
+              borderColor: "#FFFFFF",
+              padding: 10,
+            }}
+          >
+            <BackArrowIcon />
           </TouchableOpacity>
 
           <Text
@@ -102,157 +109,154 @@ const Profile = ({ navigation }) => {
               color: "#FFFFFF",
               fontSize: 20,
               fontWeight: "bold",
-              left: "35%",
             }}
           >
             Profile
           </Text>
 
-          <TouchableOpacity style={[ProfileStyles.photoBox, { left: "58%" }]}>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <SettingsButton />
-            </View>
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderRadius: 10,
+              borderColor: "#FFFFFF",
+              padding: 10,
+            }}
+          >
+            <SettingsButton />
           </TouchableOpacity>
         </View>
       </View>
-
-      <View style={{ left: "35%", height: 110, width: 110, top: "-10%" }}>
+      <View
+        style={{
+          position: "absolute",
+          top: 70, // Adjust based on the size of the profile image
+          left: 0,
+          right: 0,
+          justifyContent: "center", // This will center the PhotoCircle horizontally
+          alignItems: "center", // Ensures centering is consistent across dimensions
+        }}
+      >
         <PhotoCircle />
-        <Image />
+        {/* <Image /> */}
       </View>
 
-      <TouchableOpacity
-        style={{ top: "-13%", justifyContent: "center", left: "55%" }}
+      {/* <TouchableOpacity
+        style={{
+          position: "absolute", // Absolute to overlap the profile image
+          alignSelf: "flex-end", // Align to the right
+          padding: 16, // Padding from the sides
+          top: 140, // Adjust as needed to place the edit button correctly
+        }}
       >
         <EditPhoto />
-      </TouchableOpacity>
-
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: "bold",
-          color: "#FFFFFF",
-          left: "30%",
-          top: "-10%",
-        }}
-      >
-        {userData?.name}
-      </Text>
-      <Text
-        style={{
-          fontSize: 11,
-
-          color: "#AAAAAA",
-          left: "45%",
-          top: "-10%",
-        }}
-      >
-        {userData?.email}
-      </Text>
+      </TouchableOpacity> */}
 
       <View
         style={{
-          justifyContent: "space-around",
-          flexDirection: "row",
-          top: "-8%",
-          marginLeft: 8,
-          marginRight: 8,
+          marginTop: 62, // Adjust this margin to position the profile section correctly
+          alignItems: "center",
+          paddingHorizontal: 24,
         }}
       >
-        <View style={[ProfileStyles.box, { flexDirection: "column" }]}>
-          <View
-            style={{
-              flexDirection: "row",
-              top: "20%",
-              left: "15%",
-              alignItems: "center",
-            }}
-          >
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "#FFFFFF",
+            marginBottom: 4,
+          }}
+        >
+          {userData?.name}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            color: "#AAAAAA",
+            marginBottom: 8,
+          }}
+        >
+          {userData?.email}
+        </Text>
+        {/* Edit Icon, placed next to the profile name and email */}
+        {/* <TouchableOpacity
+          style={{
+            position: "absolute",
+            right: 20, // Adjust based on your layout needs
+            top: 20, // Adjust based on the size of the text
+          }}
+        >
+          <EditProfile />
+        </TouchableOpacity> */}
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: 16,
+
+          gap: 10,
+        }}
+      >
+        <View style={[ProfileStyles.box, { flex: 1, padding: 12 }]}>
+          <View style={{ flexDirection: "row", marginBottom: 8, gap: 10 }}>
             <Weight />
             <Text
               style={{
                 color: "#FFFFFF",
                 fontSize: 11,
-
-                left: "10%",
+                marginVertical: 4,
+                fontWeight: "bold",
               }}
             >
               Weight
             </Text>
           </View>
-
-          <View style={{ flexDirection: "row", top: "30%", left: "15%" }}>
-            <Text style={{ color: "#FFFFFF", marginRight: 4 }}>
-              {userData?.weight}
-            </Text>
-            <Text style={{ color: "#888888" }}>kg</Text>
-          </View>
+          <Text style={{ color: "#FFFFFF" }}>
+            {userData?.weight}{" "}
+            <Text style={{ color: "#888888", fontSize: 10 }}>kg</Text>
+          </Text>
         </View>
 
-        <View style={[ProfileStyles.box, { flexDirection: "column" }]}>
-          <View
-            style={{
-              flexDirection: "row",
-              top: "20%",
-              left: "15%",
-              alignItems: "center",
-            }}
-          >
+        <View style={[ProfileStyles.box, { flex: 1, padding: 12 }]}>
+          <View style={{ flexDirection: "row", marginBottom: 8, gap: 10 }}>
             <Height />
             <Text
               style={{
                 color: "#FFFFFF",
                 fontSize: 11,
-
-                left: "10%",
+                marginVertical: 4,
+                fontWeight: "bold",
               }}
             >
               Height
             </Text>
           </View>
-
-          <View style={{ flexDirection: "row", top: "30%", left: "15%" }}>
-            <Text style={{ color: "#FFFFFF", marginRight: 4 }}>
-              {userData?.height}
-            </Text>
-            <Text style={{ color: "#888888" }}>cm</Text>
-          </View>
+          <Text style={{ color: "#FFFFFF", fontSize: 16 }}>
+            {userData?.height}{" "}
+            <Text style={{ color: "#888888", fontSize: 10 }}>cm</Text>
+          </Text>
         </View>
 
-        <View style={[ProfileStyles.box, { lflexDirection: "column" }]}>
-          <View
-            style={{
-              flexDirection: "row",
-              top: "20%",
-              left: "15%",
-              alignItems: "center",
-            }}
-          >
+        <View style={[ProfileStyles.box, { flex: 1, padding: 12 }]}>
+          <View style={{ flexDirection: "row", marginBottom: 8, gap: 10 }}>
             <Age />
             <Text
               style={{
                 color: "#FFFFFF",
                 fontSize: 11,
-
-                left: "10%",
+                marginVertical: 4,
+                fontWeight: "bold",
               }}
             >
               Age
             </Text>
           </View>
-
-          <View style={{ flexDirection: "row", top: "30%", left: "15%" }}>
-            <Text style={{ color: "#FFFFFF", marginRight: 4 }}>
-              {userData?.age}
-            </Text>
-            <Text style={{ color: "#888888" }}>years</Text>
-          </View>
+          <Text style={{ color: "#FFFFFF" }}>
+            {userData?.age}{" "}
+            <Text style={{ color: "#888888", fontSize: 10 }}>years</Text>
+          </Text>
         </View>
       </View>
 
@@ -260,36 +264,28 @@ const Profile = ({ navigation }) => {
         style={[
           ProfileStyles.orangeBox,
           {
-            top: "-5%",
-
-            alignContent: "center",
             flexDirection: "row",
+            alignItems: "center",
+            padding: 20,
+            marginTop: 16, // Adjust as needed for spacing
           },
         ]}
       >
-        <View style={{ top: "-10%", left: "5%" }}>
-          <UpgradePremium />
-        </View>
-
-        <View style={{ flexDirection: "column", top: "20%", left: "10%" }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <ProBox />
-            <Text
-              style={{
-                color: "#FFFFFF",
-                fontSize: 16,
-                fontWeight: "bold",
-              }}
-            >
-              Upgrade to Premium
-            </Text>
-          </View>
+        <UpgradePremium />
+        <View style={{ marginLeft: 20, flexShrink: 1 }}>
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            Upgrade to Premium
+          </Text>
           <Text
             style={{
               color: "#FFFFFF",
               fontSize: 10,
-
-              top: "5%",
             }}
           >
             Enjoy workout access without any limits
@@ -298,113 +294,194 @@ const Profile = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-7%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <EditProfile style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          Edit Profile
-        </Text>
-        <View style={{ right: "-49%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <EditProfile />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            Edit Profile
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-9%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <SubIcon style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          My Subscription
-        </Text>
-        <View style={{ right: "-38%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <SubIcon />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            My Subscription
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-11%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <Subscription style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          Payment Methods
-        </Text>
-        <View style={{ right: "-34%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Subscription />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            Payment Methods
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-13%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <InviteFriends style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          Invite Friends
-        </Text>
-        <View style={{ right: "-43%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <InviteFriends />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            Invite Friends
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-15%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <AboutIcon style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          About Us
-        </Text>
-        <View style={{ right: "-52%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <AboutIcon />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            About Us
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          ProfileStyles.greyBox,
-          { top: "-17%", flexDirection: "row", alignContent: "center" },
-        ]}
+        style={{
+          flexDirection: "row", // Line up children in a row
+          justifyContent: "space-between", // Distribute space between children
+          alignItems: "center", // Vertically center-align children
+          padding: 20, // Add padding around
+          backgroundColor: "#2D2F33", // Or use your greyBox style
+          borderRadius: 10, // Adjust as needed
+          marginHorizontal: 16, // Side margins
+          marginTop: 16, // Add space above the button
+        }}
       >
-        <TermsIcon style={{ paddingLeft: 17, paddingRight: 17 }} />
-        <Text style={{ color: "#FFFFFF", fontSize: 14, fontWeight: "medium" }}>
-          Terms and Conditions
-        </Text>
-        <View style={{ right: "-27%" }}>
-          <RightArrow />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TermsIcon />
+          <Text
+            style={{
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: "medium",
+              marginLeft: 8,
+            }}
+          >
+            Terms and Conditions
+          </Text>
         </View>
+        <RightArrow />
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[
           ProfileStyles.whiteBox,
           {
-            top: "-15%",
-            alignContent: "center",
+            flexDirection: "row",
             justifyContent: "center",
-            marginBottom: 24,
+            alignItems: "center",
+            paddingVertical: 16, // Adjust as needed
+            marginTop: 16, // Adjust as needed for spacing
+            marginBottom: 16,
           },
         ]}
         onPress={handleLogOut}
       >
-        <LogOutIcon style={{ marginRight: 12 }} />
+        <LogOutIcon />
         <Text
           style={{
             color: "#111214",
             fontSize: 14,
             fontWeight: "bold",
+            marginLeft: 12,
           }}
         >
           Log Out
