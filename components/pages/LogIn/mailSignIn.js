@@ -66,7 +66,6 @@ const mailSignIn = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={[LogInStyles.greyBox, { top: "15%" }]}>
-          {" "}
           <Image
             source={googleIcon}
             style={{

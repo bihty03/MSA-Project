@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import { TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import appleIcon from "../../public/appleIcon.png";
 import closeButton from "../../public/closeButton.png";
 import googleIcon from "../../public/googleIcon.png";
@@ -11,6 +10,7 @@ import { useAuth } from "../../context/loginContext";
 import { useSignupContext } from "../../context/signupContext";
 import md5 from "md5";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom";
 
 const CreateAccount = ({ navigation }) => {
   const { logIn, userData } = useAuth();
@@ -70,15 +70,7 @@ const CreateAccount = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: "#111214",
-        flex: 1,
-        paddingLeft: 12,
-        paddingRight: 12,
-        paddingBottom: 12,
-      }}
-    >
+    <ConditionalSafeAreaView>
       <View style={{ flex: 1 }}>
         <View
           style={{
@@ -89,6 +81,9 @@ const CreateAccount = ({ navigation }) => {
             justifyContent: "center",
             backgroundColor: "#111214",
             paddingHorizontal: 16,
+            paddingLeft: 12,
+            paddingRight: 12,
+            paddingBottom: 12,
           }}
         >
           <TouchableOpacity
@@ -217,7 +212,7 @@ const CreateAccount = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </ConditionalSafeAreaView>
   );
 };
 

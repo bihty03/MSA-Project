@@ -8,12 +8,12 @@ import { ImageBackground } from "react-native";
 import back from "../../public/back.png";
 import chest from "../../public/chest.png";
 import PlayButton from "../../icons/playButton";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import { useExerciseContext } from "../../context/exerciseContext";
 import CaloriesIcon from "../../icons/caloriesIcon.js";
 import { useAuth } from "../../context/loginContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom";
 
 import { useCategoryContext } from "../../context/categoryContext";
 
@@ -87,10 +87,6 @@ const WorkoutCard = ({ exercise, navigation }) => {
         />
       </View>
       <View style={{ marginLeft: 24, top: -10 }}>
-        {/* <Text style={workoutsStyle.exText1}>
-          {" "}
-          {exercise.status ? "Completed" : "Uncompleted"}
-        </Text> */}
         <View>
           <Text style={workoutsStyle.exText2}>{exercise.exercise}</Text>
           <Text style={workoutsStyle.exText5}>{exercise.subCategory}</Text>
@@ -107,15 +103,17 @@ const WorkoutCard = ({ exercise, navigation }) => {
           <Text style={workoutsStyle.exText3}>{exercise.kcal} kcal/set</Text>
         </View>
       </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
-  {/* // adaugat row cu time/ kcal-total/ 4x10 sets, vezi pe wapp cu ionut */}
-  <TouchableOpacity
-    style={workoutsStyle.playButton}
-    onPress={() => handleExercise(exercise)}
-  >
-    <PlayButton />
-  </TouchableOpacity>
-</View>
+      <View
+        style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}
+      >
+        {/* // adaugat row cu time/ kcal-total/ 4x10 sets, vezi pe wapp cu ionut */}
+        <TouchableOpacity
+          style={workoutsStyle.playButton}
+          onPress={() => handleExercise(exercise)}
+        >
+          <PlayButton />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -124,8 +122,6 @@ const WorkoutsExerciseList = ({ navigation }) => {
   const { userData } = useAuth();
 
   const { categoryData } = useCategoryContext();
-
-  console.log("jypo", categoryData);
 
   const [exercisesList, setExercisesList] = React.useState([]);
 
@@ -172,10 +168,7 @@ const WorkoutsExerciseList = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#111214" }}
-      edges={["right", "top", "left"]}
-    >
+    <ConditionalSafeAreaView>
       <ScrollView
         style={{
           flex: 1,
@@ -197,7 +190,7 @@ const WorkoutsExerciseList = ({ navigation }) => {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ConditionalSafeAreaView>
   );
 };
 

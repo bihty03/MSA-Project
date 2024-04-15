@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Text, View, Button } from "react-native";
 import { workoutsStyle } from "./workoutsStyle.js";
 import WorkoutsGrid from "../../common/workoutsGrid.js";
-import { SafeAreaView } from "react-native-safe-area-context";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom.js";
 
 const WorkoutsMainPage = ({ navigation }) => {
   const [selectedItemsArray, setSelectedItemsArray] = useState([]);
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#111214" }}
-      edges={["right", "top", "left"]}
-    >
+    <ConditionalSafeAreaView>
       <View
         style={{
           display: "flex",
@@ -35,7 +32,7 @@ const WorkoutsMainPage = ({ navigation }) => {
           {...{ selectedItemsArray, setSelectedItemsArray }}
         />
       </View>
-    </SafeAreaView>
+    </ConditionalSafeAreaView>
   );
 };
 

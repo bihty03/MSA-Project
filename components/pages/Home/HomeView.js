@@ -1,16 +1,13 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import HomePart1 from "./HomePart1";
 import HomePart2 from "./HomePart2";
 import HomePart3 from "./HomePart3";
 import { ScrollView } from "react-native-gesture-handler";
 import ExercisePreview from "./WorkoutsHome/ExercisePreview";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom";
 
 const HomeView = ({ person, sampleData, navigation }) => {
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#111214" }}
-      edges={["right", "top", "left"]}
-    >
+    <ConditionalSafeAreaView>
       <ScrollView
         style={{
           flex: 1,
@@ -27,7 +24,7 @@ const HomeView = ({ person, sampleData, navigation }) => {
           navigation={navigation}
         />
       </ScrollView>
-    </SafeAreaView>
+    </ConditionalSafeAreaView>
   );
 };
 
