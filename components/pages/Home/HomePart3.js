@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -11,36 +11,51 @@ import { homeStyles } from "./homeStyle.js";
 import CaloriesIconSmall from "../../icons/caloriesIconSmall.js";
 import TimeSmallIcon from "../../icons/timeSmallIcon.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useExerciseContext } from "../../context/exerciseContext.js";
 
-const WorkoutCard = ({ image, name, kcal, time }) => {
+const WorkoutCard = ({ image, name, kcal, time, item, navigation }) => {
   const cardStyle = homeStyles.home_3.workoutCard.card;
 
+  const { setExerciseData, exerciseData } = useExerciseContext();
+
+  const handleExercise = (exercise) => {
+    setExerciseData(exercise);
+    navigation.navigate("ExercisePreviewHome");
+  };
+
   return (
-    <ImageBackground source={image} style={cardStyle}>
-      <View style={{ padding: 20 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "flex-end",
-          }}
-        >
-          <Text style={homeStyles.home_3.workoutCard.title}>{name}</Text>
-        </View>
-        <View style={homeStyles.home_3.workoutCard.secondaryTextPart}>
-          <View style={homeStyles.home_3.workoutCard.secondaryTextPartDiv}>
-            <Text style={homeStyles.home_3.workoutCard.secondaryTextPartText}>
-              <CaloriesIconSmall /> {kcal} kcal
-            </Text>
+    <TouchableOpacity onPress={() => handleExercise(item)}>
+      <ImageBackground
+        source={{
+          uri: `https://shape-mentor-prod.fra1.digitaloceanspaces.com/ex-photo/${image}.jpg`,
+        }}
+        style={[cardStyle, { justifyContent: "flex-end" }]}
+      >
+        <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "flex-end",
+            }}
+          >
+            <Text style={homeStyles.home_3.workoutCard.title}>{name}</Text>
           </View>
-          <View style={homeStyles.home_3.workoutCard.secondaryTextPartDiv}>
-            <Text style={homeStyles.home_3.workoutCard.secondaryTextPartText}>
-              <TimeSmallIcon /> {time} min
-            </Text>
+          <View style={homeStyles.home_3.workoutCard.secondaryTextPart}>
+            <View style={homeStyles.home_3.workoutCard.secondaryTextPartDiv}>
+              <Text style={homeStyles.home_3.workoutCard.secondaryTextPartText}>
+                <CaloriesIconSmall /> {kcal} kcal
+              </Text>
+            </View>
+            <View style={homeStyles.home_3.workoutCard.secondaryTextPartDiv}>
+              <Text style={homeStyles.home_3.workoutCard.secondaryTextPartText}>
+                <TimeSmallIcon /> {time} min
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 
@@ -65,18 +80,55 @@ const CategoryCard = ({ category, selectedCategory, setSelectedCategory }) => {
   );
 };
 
-const HomePart2 = ({ person, sampleData }) => {
+const HomePart2 = ({ person, sampleData, navigation }) => {
+  const [exercisesList, setExercisesList] = React.useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All type");
+
+  useEffect(() => {
+    fetch(
+      "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/exercises",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setExercisesList(data); // Assuming the data is the array of workouts
+      })
+      .catch((error) => {
+        console.error("There was a problem with your fetch operation:", error);
+      });
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  console.log("exe", exercisesList);
+
   const categories = [
     "All type",
-    "Chest",
-    "Cardio",
-    "Lower",
+    "Abs",
+    "Arms",
     "Back",
-    "Shoulders",
+    "Chest",
     "Legs",
+    "Shoulders",
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState("All type");
+  let filteredItems = exercisesList;
+
+  if (selectedCategory !== "All type") {
+    filteredItems = exercisesList.filter(
+      (item) => item.category === selectedCategory
+    );
+  } else {
+    filteredItems = exercisesList;
+  }
 
   const workoutsStyle = homeStyles.home_2.workoutsStyle.seeAllOff;
 
@@ -117,13 +169,15 @@ const HomePart2 = ({ person, sampleData }) => {
         showsVerticalScrollIndicator={false}
         style={{ marginBottom: 24 }}
       >
-        {sampleData.workouts.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <WorkoutCard
             key={item.index} // Don't forget to add a unique key prop for each item
-            image={item.image}
-            name={item.name}
+            image={item.photo}
+            name={item.exercise}
             kcal={item.kcal}
             time={item.time}
+            item={item}
+            navigation={navigation}
           />
         ))}
       </ScrollView>

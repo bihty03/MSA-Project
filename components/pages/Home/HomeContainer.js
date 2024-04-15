@@ -10,7 +10,7 @@ import strengthBand from "../../public/strengthBand.png";
 import totalBody from "../../public/totalBody.png";
 import { useAuth } from "../../context/loginContext";
 
-const HomeContainer = () => {
+const HomeContainer = ({ navigation }) => {
   const { userData } = useAuth();
 
   const person = {
@@ -75,7 +75,9 @@ const HomeContainer = () => {
     ],
   };
 
-  return <HomeView person={person} sampleData={sampleData} />;
+  return (
+    <HomeView person={person} sampleData={sampleData} navigation={navigation} />
+  );
 };
 
 export default HomeContainer;

@@ -5,7 +5,7 @@ import HomePart3 from "./HomePart3";
 import { ScrollView } from "react-native-gesture-handler";
 import ExercisePreview from "./WorkoutsHome/ExercisePreview";
 
-const HomeView = ({ person, sampleData }) => {
+const HomeView = ({ person, sampleData, navigation }) => {
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#111214" }}
@@ -21,7 +21,11 @@ const HomeView = ({ person, sampleData }) => {
       >
         <HomePart1 person={person} />
         <HomePart2 person={person} sampleData={sampleData} />
-        <HomePart3 person={person} sampleData={sampleData} />
+        <HomePart3
+          person={person}
+          sampleData={sampleData}
+          navigation={navigation}
+        />
       </ScrollView>
     </SafeAreaView>
   );
