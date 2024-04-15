@@ -15,18 +15,8 @@ import { StyleSheet } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 
 export function VideoPlayer({ video }) {
-  const [status, setStatus] = React.useState({});
-  const [initiateFullscreen, setInitiateFullscreen] = React.useState(true); // Add state to initiate fullscreen on load
-
+  const [status, setStatus] = useState({});
   const { exerciseData } = useExerciseContext();
-
-  React.useEffect(() => {
-    // Automatically attempt to enter fullscreen mode when the video component has loaded and is ready
-    if (status.isLoaded && initiateFullscreen) {
-      video.current.presentFullscreenPlayer();
-      setInitiateFullscreen(false); // Prevent further attempts to enter fullscreen
-    }
-  }, [status.isLoaded, initiateFullscreen]);
 
   return (
     <View style={styles.container}>
@@ -38,14 +28,8 @@ export function VideoPlayer({ video }) {
         useNativeControls
         resizeMode={ResizeMode.CONTAIN}
         isLooping
-        onPlaybackStatusUpdate={(statusUpdate) => {
-          setStatus(() => statusUpdate);
-          if (initiateFullscreen && statusUpdate.isLoaded) {
-            // Ensure fullscreen is only initiated when the video is fully loaded
-            video.current.presentFullscreenPlayer();
-            setInitiateFullscreen(false);
-          }
-        }}
+        shouldPlay
+        onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
     </View>
   );
@@ -75,7 +59,10 @@ const ExercisePreview = ({ navigation }) => {
 
   // Function to handle play button press
   const handlePlayPress = () => {
-    videoRef.current.presentFullscreenPlayer(); // Directly trigger fullscreen
+    if (videoRef.current) {
+      videoRef.current.playAsync(); // Start playing the video
+      videoRef.current.presentFullscreenPlayer(); // Trigger fullscreen after play
+    }
   };
 
   return (

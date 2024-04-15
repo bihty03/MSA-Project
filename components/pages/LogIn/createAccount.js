@@ -19,10 +19,8 @@ const CreateAccount = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = React.useState();
 
   console.log(userData);
-  const handleText = (value) => {
-    setSignUpData((prev) => {
-      return { ...prev, ...value };
-    });
+  const handleText = (key, value) => {
+    setSignUpData((prev) => ({ ...prev, [key]: value }));
     setErrorMsg(null);
   };
 
@@ -74,27 +72,28 @@ const CreateAccount = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <View
           style={{
-            marginVertical: 20,
-            paddingHorizontal: 10,
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-between",
             backgroundColor: "#111214",
-            paddingHorizontal: 16,
-            paddingLeft: 12,
-            paddingRight: 12,
-            paddingBottom: 12,
+            paddingHorizontal: 36,
+            paddingTop: 10,
           }}
         >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{ position: "absolute", left: 24 }}
-          >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image source={closeButton} style={{ height: 14, width: 14 }} />
           </TouchableOpacity>
-          <Text style={{ fontSize: 17, fontWeight: "bold", color: "#FFFFFF" }}>
+
+          <Text
+            style={{
+              fontSize: 17,
+              fontWeight: "bold",
+              color: "#FFFFFF",
+            }}
+          >
             Create an Account
           </Text>
+          <Text style={{ color: "#111214" }}>tt</Text>
         </View>
 
         <View style={{ marginTop: 20 }}>
@@ -157,21 +156,21 @@ const CreateAccount = ({ navigation }) => {
               style={LogInStyles.inputBox}
               placeholder="Email"
               placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ email: e.target.value })}
+              onChangeText={(text) => handleText("email", text)}
             />
             <TextInput
               style={LogInStyles.inputBox}
               placeholder="Password"
               placeholderTextColor="#6B7280"
               secureTextEntry
-              onChange={(e) => handleText({ password: e.target.value })}
+              onChangeText={(text) => handleText("password", text)}
             />
             <TextInput
               style={LogInStyles.inputBox}
               placeholder="Confirm Password"
               placeholderTextColor="#6B7280"
               secureTextEntry
-              onChange={(e) => handleText({ confirmPassword: e.target.value })}
+              onChangeText={(text) => handleText("confirmPassword", text)}
             />
             <Text style={{ color: "red", alignSelf: "center" }}>
               {errorMsg}
@@ -193,19 +192,21 @@ const CreateAccount = ({ navigation }) => {
             style={{
               marginTop: 40,
               paddingHorizontal: 10,
-              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <Text
               style={{
                 color: "#FFFFFF",
                 fontSize: 16,
-
                 marginTop: 20,
               }}
             >
               Already have an account?
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("LoginAccount")}
+              >
                 <Text style={{ color: "#FF8036", marginLeft: 8 }}>Sign In</Text>
               </TouchableOpacity>
             </Text>

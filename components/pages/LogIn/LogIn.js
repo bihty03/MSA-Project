@@ -18,11 +18,9 @@ const CreateAccount = ({ navigation }) => {
   const [signUpData, setSignUpData] = React.useState({});
   const [errorMsg, setErrorMsg] = React.useState();
 
-  console.log(userData);
-  const handleText = (value) => {
-    setSignUpData((prev) => {
-      return { ...prev, ...value };
-    });
+  console.log(signUpData);
+  const handleText = (key, value) => {
+    setSignUpData((prev) => ({ ...prev, [key]: value }));
     setErrorMsg(null);
   };
 
@@ -215,14 +213,14 @@ const CreateAccount = ({ navigation }) => {
               style={LogInStyles.inputBox}
               placeholder="Email"
               placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ email: e.target.value })}
+              onChangeText={(text) => handleText("email", text)}
             />
             <TextInput
               style={LogInStyles.inputBox}
               placeholder="Password"
               placeholderTextColor="#6B7280"
               secureTextEntry
-              onChange={(e) => handleText({ password: e.target.value })}
+              onChangeText={(text) => handleText("password", text)}
             />
 
             <Text style={{ color: "red", alignSelf: "center" }}>

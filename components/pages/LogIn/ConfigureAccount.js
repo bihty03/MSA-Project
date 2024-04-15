@@ -9,6 +9,7 @@ import { useAuth } from "../../context/loginContext";
 import { useSignupContext } from "../../context/signupContext";
 import md5 from "md5";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom";
 
 const ConfigureAccount = ({ navigation }) => {
   const { logIn, userData } = useAuth();
@@ -16,12 +17,10 @@ const ConfigureAccount = ({ navigation }) => {
   const [signUpData, setSignUpData] = React.useState({});
   const [errorMsg, setErrorMsg] = React.useState();
 
-  console.log("check", signupDataContext);
+  console.log("check", signupDataContext, signUpData);
 
-  const handleText = (value) => {
-    setSignUpData((prev) => {
-      return { ...prev, ...value };
-    });
+  const handleText = (key, value) => {
+    setSignUpData((prev) => ({ ...prev, [key]: value }));
     setErrorMsg(null);
   };
 
@@ -84,133 +83,139 @@ const ConfigureAccount = ({ navigation }) => {
   };
 
   return (
-    <View style={{ backgroundColor: "#111214", flex: 1, padding: 12 }}>
-      <View style={{ flex: 1 }}>
-        <View
-          style={{
-            marginVertical: 20,
-            paddingHorizontal: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#111214",
-            paddingHorizontal: 16,
-          }}
-        >
-          <Text style={{ fontSize: 17, fontWeight: "bold", color: "#FFFFFF" }}>
-            Configure your Account
-          </Text>
-        </View>
-
-        <View style={{ justifyContent: "space-between", width: "100%" }}>
-          <View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 30,
-                paddingHorizontal: 24,
-              }}
+    <ConditionalSafeAreaView>
+      <View style={{ backgroundColor: "#111214", flex: 1, padding: 12 }}>
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#111214",
+              paddingHorizontal: 16,
+            }}
+          >
+            <Text
+              style={{ fontSize: 17, fontWeight: "bold", color: "#FFFFFF" }}
             >
-              <Image source={line} style={{ flex: 1, height: 1 }} />
-              <Text
-                style={{
-                  color: "#6B7280",
-                  fontSize: 14,
+              Configure your Account
+            </Text>
+          </View>
 
-                  marginHorizontal: 8,
+          <View style={{ justifyContent: "space-between", width: "100%" }}>
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 10,
+                  marginBottom: 30,
+                  paddingHorizontal: 24,
                 }}
               >
-                General data
-              </Text>
-              <Image source={line} style={{ flex: 1, height: 1 }} />
-            </View>
+                <Image source={line} style={{ flex: 1, height: 1 }} />
+                <Text
+                  style={{
+                    color: "#6B7280",
+                    fontSize: 14,
 
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Name"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ name: e.target.value })}
-            />
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Gender"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ gender: e.target.value })}
-            />
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Age"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ age: e.target.value })}
-            />
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Weight"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ weight: e.target.value })}
-            />
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Height"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ height: e.target.value })}
-            />
+                    marginHorizontal: 8,
+                  }}
+                >
+                  General data
+                </Text>
+                <Image source={line} style={{ flex: 1, height: 1 }} />
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 30,
-                paddingHorizontal: 24,
-              }}
-            >
-              <Image source={line} style={{ flex: 1, height: 1 }} />
-              <Text
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Name"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("name", text)}
+              />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Gender"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("gender", text)}
+              />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Age"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("age", text)}
+              />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Weight"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("weight", text)}
+              />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Height"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("height", text)}
+              />
+
+              <View
                 style={{
-                  color: "#6B7280",
-                  fontSize: 14,
-                  fontWeight: "400",
-                  marginHorizontal: 8,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 10,
+                  marginBottom: 30,
+                  paddingHorizontal: 24,
                 }}
               >
-                Fitness skill
-              </Text>
-              <Image source={line} style={{ flex: 1, height: 1 }} />
-            </View>
+                <Image source={line} style={{ flex: 1, height: 1 }} />
+                <Text
+                  style={{
+                    color: "#6B7280",
+                    fontSize: 14,
+                    fontWeight: "400",
+                    marginHorizontal: 8,
+                  }}
+                >
+                  Fitness skill
+                </Text>
+                <Image source={line} style={{ flex: 1, height: 1 }} />
+              </View>
 
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="Rate your fitness level (1-5)"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ fitnessLevel: e.target.value })}
-            />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="Rate your fitness level (1-5)"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("fitnessLevel", text)}
+              />
 
-            <TextInput
-              style={LogInStyles.inputBox}
-              placeholder="How many days/week will you commit?"
-              placeholderTextColor="#6B7280"
-              onChange={(e) => handleText({ daysWeek: e.target.value })}
-            />
+              <TextInput
+                style={LogInStyles.inputBox}
+                placeholder="How many days/week will you commit?"
+                placeholderTextColor="#6B7280"
+                onChangeText={(text) => handleText("daysWeek", text)}
+              />
 
-            <TouchableOpacity
-              style={[LogInStyles.inputBoxSignUp]}
-              onPress={handleSetUp}
-            >
-              <Text
-                style={{ color: "#FFFFFF", fontSize: 18, fontWeight: "medium" }}
+              <TouchableOpacity
+                style={[LogInStyles.inputBoxSignUp]}
+                onPress={handleSetUp}
               >
-                Set up my Account
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: 18,
+                    fontWeight: "medium",
+                  }}
+                >
+                  Set up my Account
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </ConditionalSafeAreaView>
   );
 };
 
