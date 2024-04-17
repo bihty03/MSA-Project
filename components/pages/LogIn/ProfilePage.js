@@ -59,8 +59,6 @@ const EditPhotoBox = () => {
 const Profile = ({ navigation }) => {
   const { userData, logOut } = useAuth();
 
-  console.log("user", userData);
-
   const handleLogOut = () => {
     logOut();
     navigation.popToTop();
