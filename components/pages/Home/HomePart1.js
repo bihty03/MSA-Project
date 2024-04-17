@@ -31,6 +31,16 @@ const HomePart1 = ({ person }) => {
     return day === currentDay;
   };
 
+  let user;
+
+  if (userData) {
+    user = userData;
+  } else {
+    user = {
+      name: "Guest",
+    };
+  }
+
   return (
     <View
       style={{
@@ -41,7 +51,7 @@ const HomePart1 = ({ person }) => {
       <Text style={homeStyles.home_1.date}>{formattedDate}</Text>
       <Text
         style={homeStyles.home_1.welcome}
-      >{`${welcomePart}, ${person.name}!`}</Text>
+      >{`${welcomePart}, ${user.name}!`}</Text>
       <View
         style={{
           backgroundColor: "#24262b",

@@ -11,8 +11,6 @@ import totalBody from "../../public/totalBody.png";
 import { useAuth } from "../../context/loginContext";
 
 const HomeContainer = ({ navigation }) => {
-  const { userData } = useAuth();
-
   const person = {
     name: "Guest",
     daysOfWeek: [

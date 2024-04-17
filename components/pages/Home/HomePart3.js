@@ -108,8 +108,6 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
       });
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-  console.log("exe", exercisesList);
-
   const categories = [
     "All type",
     "Abs",
