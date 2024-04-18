@@ -153,7 +153,7 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
       >
         {categories.map((item) => (
           <CategoryCard
-            key={item.id} // Don't forget to add a unique key prop for each item
+            key={item} // Don't forget to add a unique key prop for each item
             category={item}
             setSelectedCategory={setSelectedCategory}
             selectedCategory={selectedCategory}

@@ -26,6 +26,7 @@ import ProBox from "../../icons/ProBox.js";
 import { useAuth } from "../../context/loginContext.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import ConditionalSafeAreaView from "../../utils/SafeViewCustom.js";
+import { useNavigation } from "@react-navigation/native";
 
 const EditPhotoBox = () => {
   <View style={{ backgroundColor: "#24262B", width: 326, height: 335 }}>
@@ -56,9 +57,9 @@ const EditPhotoBox = () => {
   </View>;
 };
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
   const { userData, logOut } = useAuth();
-
+  const navigation = useNavigation();
   const handleLogOut = () => {
     logOut();
     navigation.popToTop();
@@ -304,6 +305,7 @@ const Profile = ({ navigation }) => {
             marginHorizontal: 16, // Side margins
             marginTop: 16, // Add space above the button
           }}
+          onPress={() => navigation.navigate("EditAccount")}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <EditProfile />
@@ -416,6 +418,7 @@ const Profile = ({ navigation }) => {
             marginHorizontal: 16, // Side margins
             marginTop: 16, // Add space above the button
           }}
+          onPress={() => navigation.navigate("AboutUs")}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <AboutIcon />
@@ -444,6 +447,7 @@ const Profile = ({ navigation }) => {
             marginHorizontal: 16, // Side margins
             marginTop: 16, // Add space above the button
           }}
+          onPress={() => navigation.navigate("TermsConditions")}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TermsIcon />

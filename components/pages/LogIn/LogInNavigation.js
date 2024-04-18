@@ -8,6 +8,9 @@ import SignIn from "./signIn";
 import ConfigureAccount from "./ConfigureAccount.js";
 import Profile from "./ProfilePage";
 import LogIn from "./LogIn";
+import AboutUs from "../Profile/AboutUs";
+import TermsConditions from "../Profile/TermsConditions";
+import EditAccount from "./EditAccount";
 
 const WorkoutsStack = createNativeStackNavigator();
 
@@ -23,6 +26,13 @@ const LoginScreen = () => {
         component={ConfigureAccount}
       />
       <WorkoutsStack.Screen name="ProfilePage" component={Profile} />
+      <WorkoutsStack.Screen name="AboutUs" component={AboutUs} />
+      <WorkoutsStack.Screen name="EditAccount" component={EditAccount} />
+
+      <WorkoutsStack.Screen
+        name="TermsConditions"
+        component={TermsConditions}
+      />
     </WorkoutsStack.Navigator>
   );
 };
