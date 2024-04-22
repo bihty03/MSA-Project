@@ -122,12 +122,12 @@ const WorkoutsExerciseList = ({ navigation }) => {
   const [exercisesList, setExercisesList] = React.useState([]);
 
   const sentData = {
-    category: categoryData,
+    randomCategory: categoryData,
   };
 
   useEffect(() => {
     fetch(
-      "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/workouts",
+      "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/randomizer",
       {
         method: "POST",
         headers: {
