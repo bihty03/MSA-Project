@@ -18,6 +18,20 @@ export function VideoPlayer({ video }) {
   const [status, setStatus] = useState({});
   const { exerciseData } = useExerciseContext();
 
+  const handleFullscreenUpdate = async ({ fullscreenUpdate }) => {
+    switch (fullscreenUpdate) {
+      case Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
+        // This case is triggered when the video is about to exit fullscreen
+        if (video.current) {
+          await video.current.pauseAsync(); // Stop the video playback
+        }
+        break;
+      default:
+        // Handle other cases if necessary
+        break;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Video
@@ -28,8 +42,9 @@ export function VideoPlayer({ video }) {
         useNativeControls
         resizeMode={ResizeMode.CONTAIN}
         isLooping
-        shouldPlay
+        // shouldPlay
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+        onFullscreenUpdate={handleFullscreenUpdate}
       />
     </View>
   );
