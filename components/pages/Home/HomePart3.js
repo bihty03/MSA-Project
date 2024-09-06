@@ -85,8 +85,12 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
   const [exercisesList, setExercisesList] = React.useState(sampleData.cards);
   const [selectedCategory, setSelectedCategory] = useState("All type");
   const [exercisePage, setExercisePage] = usetate(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadData = () => {
+    if (isLoading) return; // Prevent multiple requests
+    setIsLoading(true);
+
     fetch(
       "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/exercises",
       {
@@ -94,9 +98,9 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        params: {
+        body: JSON.stringify({
           page: exercisePage,
-        },
+        }),
       }
     )
       .then((response) => {
@@ -106,14 +110,14 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         return response.json();
       })
       .then((data) => {
-        setExercisesList((prev) => ({
-          ...prev,
-          data,
-        }));
-        setExercisePage(exercisePage + 1);
+        setExercisesList((prev) => [...prev, ...data]); // Append new data to existing list
+        setExercisePage((prevPage) => prevPage + 1); // Increment page number
       })
       .catch((error) => {
         console.error("There was a problem with your fetch operation:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Reset loading state
       });
   };
 
@@ -209,8 +213,12 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         <FlatList
           data={filteredItems}
           renderItem={renderItem}
-          style={{ display: "flex", flexDirection: "row" }}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true} // Remove `horizontal` if you want vertical scrolling
+          onEndReached={loadData} // Call loadData when end is reached
+          onEndReachedThreshold={0.8} // Trigger at 50% before the end of content
+          ListFooterComponent={isLoading ? <Text>Loading...</Text> : null} // Show loading indicator
+          style={{ marginBottom: 24 }}
         />
       </ScrollView>
     </View>
