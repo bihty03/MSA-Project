@@ -4,6 +4,7 @@ import {
   View,
   ImageBackground,
   ScrollView,
+  FlatList,
   StyleSheet,
 } from "react-native";
 import "./homeStyle.js";
@@ -81,16 +82,20 @@ const CategoryCard = ({ category, selectedCategory, setSelectedCategory }) => {
 };
 
 const HomePart2 = ({ person, sampleData, navigation }) => {
-  const [exercisesList, setExercisesList] = React.useState([]);
+  const [exercisesList, setExercisesList] = React.useState(sampleData.cards);
   const [selectedCategory, setSelectedCategory] = useState("All type");
+  const [exercisePage, setExercisePage] = usetate(1);
 
-  useEffect(() => {
+  const loadData = () => {
     fetch(
       "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/exercises",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+        },
+        params: {
+          page: exercisePage,
         },
       }
     )
@@ -101,11 +106,33 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         return response.json();
       })
       .then((data) => {
-        setExercisesList(data); // Assuming the data is the array of workouts
+        setExercisesList((prev) => ({
+          ...prev,
+          data,
+        }));
+        setExercisePage(exercisePage + 1);
       })
       .catch((error) => {
         console.error("There was a problem with your fetch operation:", error);
       });
+  };
+
+  const renderItem = (item) => {
+    return (
+      <WorkoutCard
+        key={item.index} // Don't forget to add a unique key prop for each item
+        image={item.photo}
+        name={item.exercise}
+        kcal={item.kcal}
+        time={item.time}
+        item={item}
+        navigation={navigation}
+      />
+    );
+  };
+
+  useEffect(() => {
+    loadData();
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   const categories = [
@@ -167,7 +194,7 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         showsVerticalScrollIndicator={false}
         style={{ marginBottom: 24 }}
       >
-        {filteredItems.map((item, index) => (
+        {/* {filteredItems.map((item, index) => (
           <WorkoutCard
             key={item.index} // Don't forget to add a unique key prop for each item
             image={item.photo}
@@ -177,7 +204,14 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
             item={item}
             navigation={navigation}
           />
-        ))}
+        ))} */}
+
+        <FlatList
+          data={filteredItems}
+          renderItem={renderItem}
+          style={{ display: "flex", flexDirection: "row" }}
+          keyExtractor={(item) => item.id}
+        />
       </ScrollView>
     </View>
   );
