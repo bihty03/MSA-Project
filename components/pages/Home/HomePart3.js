@@ -84,7 +84,7 @@ const CategoryCard = ({ category, selectedCategory, setSelectedCategory }) => {
 const HomePart2 = ({ person, sampleData, navigation }) => {
   const [exercisesList, setExercisesList] = React.useState(sampleData.cards);
   const [selectedCategory, setSelectedCategory] = useState("All type");
-  const [exercisePage, setExercisePage] = usetate(1);
+  const [exercisePage, setExercisePage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const loadData = () => {
@@ -213,7 +213,7 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
         <FlatList
           data={filteredItems}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item?.id?.toString()}
           horizontal={true} // Remove `horizontal` if you want vertical scrolling
           onEndReached={loadData} // Call loadData when end is reached
           onEndReachedThreshold={0.8} // Trigger at 50% before the end of content
