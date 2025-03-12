@@ -7,16 +7,17 @@ import Timer from "../../icons/timeSmallIcon";
 import Endurance from "../../icons/WeightGrey";
 import Weight from "../../icons/WeightGrey";
 import Line from "../../icons/VerticalLine";
-import { trainerStyles } from "./workoutsStyle";
+import { trainerStyles } from "./trainerStyle";
 // import Play from "../../icons/OrangePlayButton";
 // import ExPhoto from "../../icons/Apple";
 // import Timer2 from "../../icons/stopWatch";
 
-const WorkoutDetails = () => {
+const WorkoutDetails = ({naviugation}) => {
     return (
         <ScrollView style={{backgroundColor:"#24262B", width:"100%"}}>
             <View style={{flexDirection:"column", height:350}}>  {/*background photo*/} 
-                <TouchableOpacity style={{paddingTop:50, paddingLeft:50}}>
+                <TouchableOpacity              onPress={() => navigation.goBack()}
+ style={{paddingTop:50, paddingLeft:50}}>
                     <Back/>
                 </TouchableOpacity>
 
@@ -57,7 +58,7 @@ const WorkoutDetails = () => {
 
             <View style={[trainerStyles.card, {marginHorizontal:20, marginTop:20, flexDirection:"row", justifyContent:"space-around"}]}>
                 <View style={{justifyContent:"center"}}>
-                    <ExPhoto/>  {/*exercise photo*/}
+                    {/* <ExPhoto/>  exercise photo */}
                 </View>
 
                 <View style={{flexDirection:"column", marginVertical:20, justifyContent:"space-around"}}>
@@ -77,7 +78,7 @@ const WorkoutDetails = () => {
 
             <View style={[trainerStyles.card, {marginHorizontal:20, marginVertical:20, flexDirection:"row", justifyContent:"space-around"}]}>
                 <View style={{justifyContent:"center"}}>
-                    <ExPhoto/>
+                    {/* <ExPhoto/> */}
                 </View>
 
                 <View style={{flexDirection:"column", marginVertical:20, justifyContent:"space-around"}}>
@@ -91,13 +92,13 @@ const WorkoutDetails = () => {
                 </View>
 
                 <TouchableOpacity style={{justifyContent:"center"}}>
-                    <Play/>
+                    {/* <Play/> */}
                 </TouchableOpacity>
             </View>
 
             <TouchableOpacity style={[trainerStyles.orangeBox, {marginHorizontal:20, justifyContent:"center", alignItems:"center", marginTop:0}]}>
                 <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>Start Workout</Text>
-                <Timer2/>
+                {/* <Timer2/> */}
             </TouchableOpacity>
         </ScrollView>
     )
