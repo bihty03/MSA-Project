@@ -7,10 +7,10 @@ import Timer from "../../icons/timeSmallIcon";
 import Endurance from "../../icons/WeightGrey";
 import Weight from "../../icons/WeightGrey";
 import Line from "../../icons/VerticalLine";
-import { trainerStyles } from "./TrainerStyles";
-import Play from "../../icons/OrangePlayButton";
-import ExPhoto from "../../icons/Apple";
-import Timer2 from "../../icons/stopWatch";
+import { trainerStyles } from "./workoutsStyle";
+// import Play from "../../icons/OrangePlayButton";
+// import ExPhoto from "../../icons/Apple";
+// import Timer2 from "../../icons/stopWatch";
 
 const WorkoutDetails = () => {
     return (
@@ -65,13 +65,13 @@ const WorkoutDetails = () => {
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>Exercise Name</Text>
                     
                     <View style={{flexDirection:"row", justifyContent:"space-around", alignItems:"center"}}>
-                        <Timer/>
+                        {/* <Timer/> */}
                         <Text style={{color:"#9EA0A5", fontSize:16, fontWeight:500}}>5 minutes</Text>
                     </View>
                 </View>
 
                 <TouchableOpacity style={{justifyContent:"center"}}>
-                    <Play/>
+                    {/* <Play/> */}
                 </TouchableOpacity>
             </View>
 
@@ -85,7 +85,7 @@ const WorkoutDetails = () => {
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>Exercise Name</Text>
                     
                     <View style={{flexDirection:"row", justifyContent:"space-around", alignItems:"center"}}>
-                        <Timer/>
+                        {/* <Timer/> */}
                         <Text style={{color:"#9EA0A5", fontSize:16, fontWeight:500}}>5 minutes</Text>
                     </View>
                 </View>
