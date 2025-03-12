@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TrainerMainPage from "./TrainerList";
 import TrainerPage from "./TrainerPage";
 import TrainerPreview from "./TrainerPreview";
+import WorkoutDetails from "./work";
 
 import TrainerContact from "./ChatWindos";
 
@@ -26,6 +27,12 @@ const WorkoutsScreen = () => {
         name="TrainerPage"
         component={TrainerPage}
       />
+
+<WorkoutsStack.Screen
+        name="WorkoutDetails"
+        component={WorkoutDetails}
+      />
+
       <WorkoutsStack.Screen
         name="TrainerContact"
         component={TrainerContact}

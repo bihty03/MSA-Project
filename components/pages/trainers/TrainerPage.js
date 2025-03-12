@@ -8,10 +8,14 @@ import Muscle from "./../../icons/WeightGrey";
 
 const WorkoutsList = ({navigation}) => {
 
-    const handleExercise = (exercise) => {
-        navigation.navigate("TrainerContact");
+    const handleContacthandleExercise = (exercise) => {
+        navigation.navigate("WorkoutDetails");
       };
 
+      
+      const handleContact = (exercise) => {
+        navigation.navigate("TrainerContact");
+      };
     return (
         <View style={{backgroundColor:"#111214", flexDirection:"column", height:"100%"}}>
             <View style={{padding:30, justifyContent:"center", alignSelf:"center"}}>
@@ -24,7 +28,7 @@ const WorkoutsList = ({navigation}) => {
                 <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500, paddingTop:15}}>Completed Trainings - </Text>
             </View>
 
-            <TouchableOpacity onPress={handleExercise} style={[trainerStyles.orangeBox, {justifyContent:"center"}]}>
+            <TouchableOpacity onPress={handleContact} style={[trainerStyles.orangeBox, {justifyContent:"center"}]}>
                 <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>Chat with trainer</Text>
             </TouchableOpacity>
 
@@ -36,7 +40,7 @@ const WorkoutsList = ({navigation}) => {
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:400, marginLeft:10}}>Surprise</Text>
                 </View>
 
-                <TouchableOpacity style={[trainerStyles.greyBox, {width:160, height:40, justifyContent:"center", alignItems:"center", marginTop:15}]}>
+                <TouchableOpacity onPress={handleContacthandleExercise} style={[trainerStyles.greyBox, {width:160, height:40, justifyContent:"center", alignItems:"center", marginTop:15}]}>
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>To be Designed</Text>
                 </TouchableOpacity>
             </View>
@@ -49,7 +53,7 @@ const WorkoutsList = ({navigation}) => {
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:400, marginLeft:10}}>Quads</Text>
                 </View>
 
-                <TouchableOpacity style={[trainerStyles.orangeBox, {width:160, height:40, justifyContent:"center", alignItems:"center", marginTop:15}]}>
+                <TouchableOpacity onPress={handleContacthandleExercise} style={[trainerStyles.orangeBox, {width:160, height:40, justifyContent:"center", alignItems:"center", marginTop:15}]}>
                     <Text style={{color:"#FFFFFF", fontSize:16, fontWeight:500}}>Start</Text>
                 </TouchableOpacity>
             </View>
