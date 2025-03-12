@@ -74,7 +74,7 @@ const ExercisePreview = ({ navigation }) => {
 
   // Function to handle play button press
   const handlePlayPress = () => {
-      navigation.navigate("TrainerContact");
+      navigation.navigate("TrainerPage");
   };
 
   return (
@@ -166,7 +166,7 @@ const ExercisePreview = ({ navigation }) => {
                 color: "#FFFFFF",
               }}
             >
-              Contact
+              Start
             </Text>
             {/* <StopWatch /> */}
           </View>

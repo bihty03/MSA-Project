@@ -4,7 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import TrainerMainPage from "./TrainerList";
+import TrainerPage from "./TrainerPage";
 import TrainerPreview from "./TrainerPreview";
+
 import TrainerContact from "./ChatWindos";
 
 const WorkoutsStack = createNativeStackNavigator();
@@ -16,9 +18,13 @@ const WorkoutsScreen = () => {
         name="TrainerMainPage"
         component={TrainerMainPage}
       />
-      <WorkoutsStack.Screen
+            <WorkoutsStack.Screen
         name="TrainerPreview"
         component={TrainerPreview}
+      />
+      <WorkoutsStack.Screen
+        name="TrainerPage"
+        component={TrainerPage}
       />
       <WorkoutsStack.Screen
         name="TrainerContact"
