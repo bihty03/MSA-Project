@@ -127,7 +127,7 @@ const WorkoutsExerciseList = ({ navigation }) => {
 
   useEffect(() => {
     fetch(
-      "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/randomizer",
+      "http://localhost:5050/api/workouts/randomizer",
       {
         method: "POST",
         headers: {

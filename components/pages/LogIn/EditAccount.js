@@ -27,7 +27,7 @@ const ConfigureAccount = ({ navigation }) => {
 
     try {
       const response = await fetch(
-        "https://jellyfish-app-2-7736b.ondigitalocean.app/api/users/profile", // Assume this is your update endpoint
+        "http://localhost:5050/api/users/profile", // Assume this is your update endpoint
         {
           method: "PUT", // Change to PATCH or PUT as needed
           headers: {

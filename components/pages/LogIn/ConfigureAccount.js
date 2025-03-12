@@ -48,7 +48,7 @@ const ConfigureAccount = ({ navigation }) => {
       const encryptedPassword = md5(password);
 
       const response = await fetch(
-        "https://jellyfish-app-2-7736b.ondigitalocean.app/api/users",
+        "http://localhost:5050/api/users",
         {
           method: "POST",
           headers: {

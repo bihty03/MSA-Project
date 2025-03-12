@@ -92,7 +92,7 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
     setIsLoading(true);
 
     fetch(
-      "https://jellyfish-app-2-7736b.ondigitalocean.app/api/workouts/exercises",
+      "http://localhost:5050/api/workouts/exercises",
       {
         method: "POST",
         headers: {

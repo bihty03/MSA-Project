@@ -2,7 +2,7 @@
   "expo": {
     "name": "ShapeMentor",
     "slug": "fitness-app-prod",
-        "version": "1.2.8",
+    "version": "1.2.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "extra": {
       "eas": {
         "projectId": "e288bd2f-e388-4ac6-b59b-0fcbf60ddbd6"
@@ -21,8 +19,18 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fitnessappprod"
-
+      "bundleIdentifier": "com.fitnessappprod",
+      "buildNumber": "3",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": ["location", "fetch"],
+        "CFBundleAllowMixedLocalizations": true,
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "App requires geolocation to improve the quality of the service",
+        "NSLocationAlwaysUsageDescription": "App requires geolocation to improve the quality of the service",
+        "NSLocationWhenInUseUsageDescription": "App requires geolocation to improve the quality of the service",
+        "NSCameraUsageDescription": "The picture will be used to inform the state of the packages during delivery",
+        "NSMicrophoneUsageDescription": "We're accessing the microphone for the Chat features that are currently in beta"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -31,12 +39,10 @@
       },
       "package": "com.fitnessappprod",
       "versionCode": 28
-
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
   },
   "name": "fitness-app-prod"
-
 }

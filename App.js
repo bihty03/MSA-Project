@@ -21,6 +21,10 @@ import Profile from "./components/pages/Profile/ProfileContainer";
 import ProfileIcon from "./components/icons/profileIcon";
 
 import Login from "./components/pages/LogIn/LogInNavigation";
+import Trainers from "./components/pages/trainers/TrainersNavigation";
+
+import TrainerIcon from "./components/icons/trainer";
+
 
 import Randomizer from "./components/pages/Randomizer/RandomizerNavigation";
 import RandomizerIcon from "./components/icons/randomizer";
@@ -45,8 +49,8 @@ const AppNavigation = () => {
               iconComponent = <RandomizerIcon isActive={focused} />;
             } else if (route.name === "Profile") {
               iconComponent = <ProfileIcon isActive={focused} />;
-            }
 
+            }
             return iconComponent;
           },
 
@@ -61,6 +65,7 @@ const AppNavigation = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Exercises" component={Workouts} />
         <Tab.Screen name="Randomizer" component={Randomizer} />
+        <Tab.Screen name="Trainers" component={Trainers} />
         <Tab.Screen name="Profile" component={Login} />
       </Tab.Navigator>
     </NavigationContainer>

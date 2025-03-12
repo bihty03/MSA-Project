@@ -3,19 +3,18 @@ import { Image, Text, View } from "react-native";
 import playButton from "../../public/playButton.png";
 import timeClock from "../../public/timeClock.png";
 import HomePart1 from "../Home/HomePart1.js";
-import { workoutsStyle } from "./workoutsStyle.js";
+import { workoutsStyle } from "../trainers/workoutsStyle.js";
 import { ImageBackground } from "react-native";
 import back from "../../public/back.png";
 import chest from "../../public/chest.png";
-import PlayButton from "../../icons/playButton";
+import PlayButton from "../../icons/playButton.js";
 import { ScrollView } from "react-native-gesture-handler";
-import { useExerciseContext } from "../../context/exerciseContext";
-import CaloriesIcon from "../../icons/caloriesIcon.js";
-import { useAuth } from "../../context/loginContext";
+import { useExerciseContext } from "../../context/exerciseContext.js";
+import { useAuth } from "../../context/loginContext.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ConditionalSafeAreaView from "../../utils/SafeViewCustom";
+import ConditionalSafeAreaView from "../../utils/SafeViewCustom.js";
 
-import { useCategoryContext } from "../../context/categoryContext";
+import { useCategoryContext } from "../../context/categoryContext.js";
 
 // exercise ii un object ce are {
 //     image: ...
@@ -57,12 +56,49 @@ const exercise = [
   },
 ];
 
+const trainers = [
+  {
+    image: back,
+    status: "Uncompleted",
+    name: "Alexandru",
+    foto: "BenchPress",
+    price: 30,
+    rating: 3
+  },
+  {
+    image: undefined,
+    status: "Uncompleted",
+    name: "Claudiu",
+    foto: "BenchPress",
+    rating: 4,
+    price: 30,
+  },
+  {
+    image: undefined,
+    status: "Uncompleted",
+    name: "Radu",
+    foto: "BenchPress",
+    rating: 4.5,
+    price: 30,
+  },
+  {
+    image: undefined,
+    status: "Uncompleted",
+    name: "Silviu",
+    foto: "BenchPress",
+    rating: 4,
+    price: 30,
+  },
+];
+
 const WorkoutCard = ({ exercise, navigation }) => {
+  const { userData } = useAuth();
   const { setExerciseData } = useExerciseContext();
   const handleExercise = (exercise) => {
     setExerciseData(exercise);
-    navigation.navigate("ExercisePreviewWorkouts");
+    navigation.navigate("TrainerPreview");
   };
+
   return (
     <View
       style={{
@@ -86,23 +122,17 @@ const WorkoutCard = ({ exercise, navigation }) => {
           style={workoutsStyle?.card_image}
         />
       </View>
+
       <View style={{ marginLeft: 24, top: -10 }}>
-        <View>
-          <Text style={workoutsStyle.exText2}>{exercise.exercise}</Text>
-          <Text style={workoutsStyle.exText5}>{exercise.subCategory}</Text>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-end",
-            marginTop: 6,
-          }}
-        >
-          <CaloriesIcon />
-          <Text style={workoutsStyle.exText3}>{exercise.kcal} kcal/set</Text>
+        <Text style={workoutsStyle.exText2}>
+          {exercise.name}
+        </Text>
+        <Text style={workoutsStyle.exText1}>Rating {exercise.rating}/5 </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={workoutsStyle.exText3}>Price {exercise.price} Lei</Text>
         </View>
       </View>
+
       <View
         style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}
       >
@@ -119,19 +149,17 @@ const WorkoutCard = ({ exercise, navigation }) => {
 };
 
 const WorkoutsExerciseList = ({ navigation }) => {
-  const { userData } = useAuth();
-
   const { categoryData } = useCategoryContext();
 
   const [exercisesList, setExercisesList] = React.useState([]);
 
   const sentData = {
-    category: categoryData,
+    randomCategory: 'Cardio',
   };
 
   useEffect(() => {
     fetch(
-      "http://localhost:5050/api/workouts/workouts",
+      "http://localhost:5050/api/workouts/randomizer",
       {
         method: "POST",
         headers: {
@@ -177,11 +205,11 @@ const WorkoutsExerciseList = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
-        <HomePart1 person={person} />
+        {/* <HomePart1 person={person} /> */}
 
-        <Text style={workoutsStyle.text}>Your selected type exercises</Text>
+        <Text style={workoutsStyle.text}>Available Trainers</Text>
         <View style={{ marginBottom: 24 }} key={exercisesList}>
-          {exercisesList.map((exercise) => (
+          {trainers.map((exercise) => (
             <WorkoutCard
               key={exercise.exercise + exercise.subCategory}
               exercise={exercise}
