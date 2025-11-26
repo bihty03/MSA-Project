@@ -13,6 +13,8 @@ import CaloriesIconSmall from "../../icons/caloriesIconSmall.js";
 import TimeSmallIcon from "../../icons/timeSmallIcon.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useExerciseContext } from "../../context/exerciseContext.js";
+import { Video } from 'expo-av';
+import ChestWorkoutVideo from '../../../assets/ChestWorkout.mp4';
 
 const WorkoutCard = ({ image, name, kcal, time, item, navigation }) => {
   const cardStyle = homeStyles.home_3.workoutCard.card;
@@ -209,6 +211,24 @@ const HomePart2 = ({ person, sampleData, navigation }) => {
             navigation={navigation}
           />
         ))} */}
+
+          {selectedCategory === "Abs" && (
+              <View style={{ alignItems: "center", marginVertical: 10 }}>
+                  <Text style={{ color: "white", fontSize: 18, marginBottom: 10 }}>
+                      Abs selected!
+                  </Text>
+                  <Video
+                      source={ ChestWorkoutVideo }
+                      rate={1.0}
+                      volume={1.0}
+                      isMuted={false}
+                      resizeMode="cover"
+                      shouldPlay
+                      useNativeControls
+                      style={{ width: 2000, height: 800, borderRadius: 8 }}
+                  />
+              </View>
+          )}
 
         <FlatList
           data={filteredItems}
